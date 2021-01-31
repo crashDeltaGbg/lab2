@@ -2,10 +2,10 @@
     <div id="main">
         <div id="left">
             <h1>My FFXIV character</h1>
-            <h2>{{ character.Character.Name }}</h2>
-            <h3>Level {{ character.Character.ActiveClassJob.Level }} {{ character.Character.ActiveClassJob.UnlockedState.Name }}</h3>
+            <h2>{{ character.Name }}</h2>
+            <h3>Level {{ character.ActiveClassJob.Level }} {{ character.ActiveClassJob.UnlockedState.Name }}</h3>
             <div>
-                <img alt="Picture of my character" id="portrait" :src="character.Character.Portrait"/>
+                <img alt="Picture of my character" id="portrait" :src="character.Portrait"/>
             </div>
         </div>
         <div id="right">    
@@ -20,13 +20,25 @@
 </template>
 
 <script>
+
+// import Vue from 'vue'
+import axios from 'axios'
+
+// Vue.use(axios)
+
 export default {
     created() {
-        fetch('https://xivapi.com/character/22655123?private_key=2864ae3e5f2f45ddb08406bc1976e2ebcbfa41f182564e0788be9fe72605a0b1')
+        axios.get('https://xivapi.com/character/22655123?private_key=2864ae3e5f2f45ddb08406bc1976e2ebcbfa41f182564e0788be9fe72605a0b1')
+        .then(function (response) {
+            console.log(response.data.Character)
+            this.character = response.data.Character
+            console.log(this.character)
+        })
+        /* fetch('https://xivapi.com/character/22655123?private_key=2864ae3e5f2f45ddb08406bc1976e2ebcbfa41f182564e0788be9fe72605a0b1')
         .then((response) => response.json())
         .then((result) => {
             this.character = result
-        })
+        }) */
     },
     data() {
         return {
@@ -37,7 +49,7 @@ export default {
     name: 'Home',
     watch: {
         character() {
-            this.jobs = this.character.Character.ClassJobs
+            this.jobs = this.character.ClassJobs
         }
     }
 }
