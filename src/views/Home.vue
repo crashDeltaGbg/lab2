@@ -37,7 +37,7 @@ export default {
         /* fetch('https://xivapi.com/character/22655123?private_key=2864ae3e5f2f45ddb08406bc1976e2ebcbfa41f182564e0788be9fe72605a0b1')
         .then((response) => response.json())
         .then((result) => {
-            this.character = result
+            this.character = result.Character
         }) */
     },
     data() {
