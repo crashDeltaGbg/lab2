@@ -1,9 +1,14 @@
 <template>
     <div id="main">
         <div id="left">
-            <h1>My FFXIV character</h1>
-            <h2>{{ character.Name }}</h2>
-            <h3>Level {{ character.ActiveClassJob.Level }} {{ character.ActiveClassJob.UnlockedState.Name }}</h3>
+            <!-- <h1>My FFXIV character</h1> -->
+            <h1>{{ character.Name }}</h1>
+            <!-- <h2>Active Class/Job</h2>
+                <p>Level {{ character.ActiveClassJob.Level }} {{ character.ActiveClassJob.UnlockedState.Name }}</p> -->
+            <h3>Data Center</h3>
+                <p>{{ character.DC }}</p>
+            <h3>Server</h3>
+                <p>{{ character.Server }}</p>
             <div>
                 <img alt="Picture of my character" id="portrait" :src="character.Portrait"/>
             </div>
@@ -22,23 +27,24 @@
 <script>
 
 // import Vue from 'vue'
-import axios from 'axios'
+// import axios from 'axios'
 
 // Vue.use(axios)
 
 export default {
     created() {
-        axios.get('https://xivapi.com/character/22655123?private_key=2864ae3e5f2f45ddb08406bc1976e2ebcbfa41f182564e0788be9fe72605a0b1')
+        /* axios.get('https://xivapi.com/character/22655123?private_key=2864ae3e5f2f45ddb08406bc1976e2ebcbfa41f182564e0788be9fe72605a0b1')
         .then(function (response) {
             console.log(response.data.Character)
             this.character = response.data.Character
             console.log(this.character)
-        })
-        /* fetch('https://xivapi.com/character/22655123?private_key=2864ae3e5f2f45ddb08406bc1976e2ebcbfa41f182564e0788be9fe72605a0b1')
+        }) */
+        fetch('https://xivapi.com/character/22655123?private_key=2864ae3e5f2f45ddb08406bc1976e2ebcbfa41f182564e0788be9fe72605a0b1')
         .then((response) => response.json())
         .then((result) => {
+            console.log(result)
             this.character = result.Character
-        }) */
+        })
     },
     data() {
         return {
@@ -72,7 +78,7 @@ export default {
 
 #portrait {
     border-radius: 10px;
-    max-height: 60vh;
+    max-height: 40vh;
 }
 
 li {
