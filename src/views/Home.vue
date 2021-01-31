@@ -27,24 +27,24 @@
 <script>
 
 // import Vue from 'vue'
-// import axios from 'axios'
+import axios from 'axios'
 
 // Vue.use(axios)
 
 export default {
     created() {
-        /* axios.get('https://xivapi.com/character/22655123?private_key=2864ae3e5f2f45ddb08406bc1976e2ebcbfa41f182564e0788be9fe72605a0b1')
-        .then(function (response) {
+        axios.get('https://xivapi.com/character/22655123?private_key=2864ae3e5f2f45ddb08406bc1976e2ebcbfa41f182564e0788be9fe72605a0b1')
+        .then(response => {
             console.log(response.data.Character)
             this.character = response.data.Character
             console.log(this.character)
-        }) */
-        fetch('https://xivapi.com/character/22655123?private_key=2864ae3e5f2f45ddb08406bc1976e2ebcbfa41f182564e0788be9fe72605a0b1')
+        })
+        /* fetch('https://xivapi.com/character/22655123?private_key=2864ae3e5f2f45ddb08406bc1976e2ebcbfa41f182564e0788be9fe72605a0b1')
         .then((response) => response.json())
         .then((result) => {
             console.log(result)
             this.character = result.Character
-        })
+        }) */
     },
     data() {
         return {
