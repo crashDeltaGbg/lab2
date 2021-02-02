@@ -24,9 +24,10 @@
 }
 
 #nav {
+  /* align-self: flex-start; */
   padding: 30px;
   text-align: left;
-  width: 60vw;
+  width: 90vw;
 }
 
 #nav a {

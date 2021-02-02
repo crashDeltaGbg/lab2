@@ -1,43 +1,39 @@
 <template>
-    <div id="main">
-        <div id="left">
-            <!-- <h1>My FFXIV character</h1> -->
-            <h1>{{ character.Name }}</h1>
-            <!-- <h2>Active Class/Job</h2>
-                <p>Level {{ character.ActiveClassJob.Level }} {{ character.ActiveClassJob.UnlockedState.Name }}</p> -->
-            <h3>Data Center</h3>
-                <p>{{ character.DC }}</p>
-            <h3>Server</h3>
-                <p>{{ character.Server }}</p>
-            <div>
-                <img alt="Picture of my character" id="portrait" :src="character.Portrait"/>
+    <div id="main"> 
+        <div id="top">
+            <h1>Polisen i Göteborg</h1>
+        </div>  
+        <div id="body">
+            <div id="left">
+                <h2>Händelser</h2>
+                <dl v-if="events">
+                    <template v-for="event in events">
+                        <dt :key="event.datetime"><strong>{{ event.type }}</strong>:&nbsp;{{ event.datetime }}</dt>
+                        <dd :key="event.id">{{ event.summary }}<br/>
+                        <a :href="event.url" target="_blank">mer&hellip;</a></dd> 
+                    </template>
+                </dl>
+            </div>
+            <div id="right">
+                <h2>Länkar</h2>
+                <p><a href="https://polisen.se/utsatt-for-brott/polisanmalan/" target="_blank">Anmäl brott eller förlust</a></p>
+                <p><a href="https://polisen.se/kontakt/tipsa-polisen/tipsa-polisen-via-webben/" target="_blank">Tipsa polisen</a></p>
             </div>
         </div>
-        <div id="right">    
-            <ul v-if="jobs">
-                <template v-for="job in jobs">
-                    <li :key="job.JobID"><strong>{{ job.Name }}</strong>: {{ job.Level }}</li>    
-                </template>
-            </ul>
-        </div>
-        <!-- <div v-else>Not just yet&hellip;</div> -->
     </div>
 </template>
 
 <script>
 
-// import Vue from 'vue'
 import axios from 'axios'
-
-// Vue.use(axios)
 
 export default {
     created() {
-        axios.get('https://xivapi.com/character/22655123?private_key=2864ae3e5f2f45ddb08406bc1976e2ebcbfa41f182564e0788be9fe72605a0b1')
+        axios.get('https://polisen.se/api/events?locationname=Göteborg')
         .then(response => {
-            console.log(response.data.Character)
-            this.character = response.data.Character
-            console.log(this.character)
+            // console.log(response.data)
+            this.events = response.data
+            // console.log(this.events)
         })
         /* fetch('https://xivapi.com/character/22655123?private_key=2864ae3e5f2f45ddb08406bc1976e2ebcbfa41f182564e0788be9fe72605a0b1')
         .then((response) => response.json())
@@ -48,32 +44,41 @@ export default {
     },
     data() {
         return {
-            character: {},
-            jobs: []
+            events: {},
         }
     },
     name: 'Home',
-    watch: {
+    /* watch: {
         character() {
             this.jobs = this.character.ClassJobs
         }
-    }
+    } */
 }
 </script>
 
 <style scoped>
 
+#body {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
 #left, #right {
+    flex-grow: 1;
+}
+
+#left, #right, #top {
     text-align: left;
 }
 
 #main {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
     margin: auto;
     max-height: 100vh;
-    width: 60vw;
+    width: 90vw;
 }
 
 #portrait {
@@ -81,12 +86,17 @@ export default {
     max-height: 40vh;
 }
 
-li {
-    line-height: 1.5em;
+dd {
+    background-color: aliceblue;
 }
 
-ul {
-    background-color: lightblue;
+dt, dd {
+    line-height: 2em;
+    max-width: 40em;
+}
+
+dl {
+    /* background-color: lightblue; */
     border-radius: 10px;
     list-style-type: none;
     margin: 0;

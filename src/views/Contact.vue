@@ -20,7 +20,7 @@
     justify-content: space-between;
     margin: auto;
     max-height: 100vh;
-    width: 60vw;
+    width: 90vw;
 }
 
 dt {
