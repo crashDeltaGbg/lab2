@@ -1,6 +1,6 @@
 <template>
     <div v-if="show">
-        <img alt="Volvo Amazon - polisbil" src="../assets/polisbil.png"/>
+        <img alt="Volvo Amazon - polisbil" src="../assets/polisbil_192.png"/>
     </div>
     <div v-else>
         <input @click="wtf()" type="button" value="wtf?"/>
