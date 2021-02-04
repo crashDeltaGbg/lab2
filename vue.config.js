@@ -13,7 +13,7 @@ module.exports = {
                     options: {
                         networkTimeoutSeconds: 5
                     },
-                    urlPatter: 'https://polisen.se/api/events?locationname=Göteborg'
+                    urlPattern: 'https://polisen.se/api/events?locationname=Göteborg'
                 }
             ]
         }
