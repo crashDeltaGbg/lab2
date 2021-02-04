@@ -5,6 +5,17 @@ module.exports = {
             short_name: 'Polisen'
         },
         name: 'Polisen i Göteborg',
-        themeColor: '#4370CC'
+        themeColor: '#4370CC',
+        workboxOptions: {
+            runtimeCaching: [
+                {
+                    handler: 'NetworkFirst',
+                    options: {
+                        networkTimeoutSeconds: 5
+                    },
+                    urlPatter: 'https://polisen.se/api/events?locationname=Göteborg'
+                }
+            ]
+        }
     }
 }
